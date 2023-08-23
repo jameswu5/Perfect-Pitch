@@ -6,7 +6,7 @@ public class Key : MonoBehaviour
 {
     public int octave;
     public int note;
-    private int id;
+    public int id;
     private bool isWhiteKey;
     private Color originalColour;
     private Color highlightColour;
@@ -32,11 +32,10 @@ public class Key : MonoBehaviour
         sr.color = selected ? originalColour : highlightColour;
         selected = !selected;
         piano.ToggleKey(id);
-        Debug.Log(this);
     }
 
-    public override string ToString()
+    public void ResetColour()
     {
-        return $"{Note.GetNote(note)}{octave}";
+        sr.color = originalColour;
     }
 }
