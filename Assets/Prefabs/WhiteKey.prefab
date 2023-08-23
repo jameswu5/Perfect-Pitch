@@ -144,9 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6d82bc6eb474d4380db7057b7af636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isWhiteKey: 0
+  White: {r: 0.8687234, g: 0.9245283, b: 0.36196154, a: 0}
+  Black: {r: 0, g: 0, b: 0, a: 0}
   octave: 0
   note: 0
+  sr: {fileID: 0}
 --- !u!1 &8957508137196793472
 GameObject:
   m_ObjectHideFlags: 0
