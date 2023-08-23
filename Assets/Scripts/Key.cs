@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Key : MonoBehaviour
 {
-    
     public int octave;
     public int note;
+    private int id;
     private bool isWhiteKey;
     private Color originalColour;
     private Color highlightColour;
-    public SpriteRenderer sr;
+    private SpriteRenderer sr;
+
+    private Piano piano;
 
     private bool selected;
 
@@ -21,13 +23,15 @@ public class Key : MonoBehaviour
         highlightColour = isWhiteKey ? Colour.LightGrey : Colour.DarkGrey;
         sr = isWhiteKey ? gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() : gameObject.GetComponent<SpriteRenderer>();
         selected = false;
+        id = octave * 12 + note - 1;
+        piano = transform.parent.parent.GetComponent<Piano>();
     }
 
     private void OnMouseDown()
     {
         sr.color = selected ? originalColour : highlightColour;
         selected = !selected;
-
+        piano.ToggleKey(id);
         Debug.Log(this);
     }
 

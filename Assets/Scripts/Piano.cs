@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Piano : MonoBehaviour
 {
-    public int octaves;
-    public GameObject key;
+    public const int NumberOfKeys = 88;
+    public bool[] selectedKeys;
 
-
-    public void Initialise(int octaves)
+    private void Start()
     {
-        this.octaves = octaves;
+        selectedKeys = new bool[NumberOfKeys];
+    }
+
+    public void ToggleKey(int keyID)
+    {
+        selectedKeys[keyID] = !selectedKeys[keyID];
     }
 }
