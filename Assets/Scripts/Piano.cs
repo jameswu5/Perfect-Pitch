@@ -8,8 +8,13 @@ public class Piano : MonoBehaviour
     public const int NumberOfKeys = 88;
     public bool[] selectedKeys;
     public Key[] keys;
-
     public Sound sound;
+
+    public const int C3 = 27;
+    public const int C4 = 39;
+    public const int C5 = 51;
+    public const int C6 = 63;
+    public const int C7 = 75;
 
     private void Start()
     {
@@ -57,6 +62,5 @@ public class Piano : MonoBehaviour
                 keys[i].ResetColour();
             }
         }
-
     }
 }
