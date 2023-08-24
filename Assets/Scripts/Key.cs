@@ -31,7 +31,7 @@ public class Key : MonoBehaviour
     {
         sr.color = selected ? originalColour : highlightColour;
         selected = !selected;
-        piano.ToggleKey(id);
+        piano.ToggleKey(id, selected);
     }
 
     public void ResetColour()

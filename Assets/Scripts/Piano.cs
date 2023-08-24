@@ -46,9 +46,9 @@ public class Piano : MonoBehaviour
         }
     }
 
-    public void ToggleKey(int keyID)
+    public void ToggleKey(int keyID, bool selected)
     {
-        selectedKeys[keyID] = !selectedKeys[keyID];
+        selectedKeys[keyID] = selected;
     }
 
     public void Clear()

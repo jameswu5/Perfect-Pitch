@@ -17,6 +17,9 @@ public class Game : MonoBehaviour
     public Text scoreText;
 
     public Piano piano;
+    public Sound sound;
+
+    public bool[] answer;
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +31,10 @@ public class Game : MonoBehaviour
         scoreText.text = score.ToString();
         levelText.text = level.ToString();
         octaveText.text = octaves.ToString();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CreateLevel();
+        sound.Play(answer);
+
     }
 
     public void IncrementScore()
@@ -76,7 +77,7 @@ public class Game : MonoBehaviour
     }
 
 
-    public bool[] CreateLevel()
+    public void CreateLevel()
     {
         bool[] notes = new bool[Piano.NumberOfKeys];
         int notesLeft = level;
@@ -95,7 +96,42 @@ public class Game : MonoBehaviour
             }
         }
 
-        return notes;
+        answer = notes;
+    }
+
+    public void Submit()
+    {
+        bool[] submitted = piano.selectedKeys;
+        if (CheckAnswer(submitted, answer))
+        {
+            IncrementScore();
+            CreateLevel();
+        }
+        piano.Clear();
+        sound.Play(answer);
+    }
+
+    public void Replay()
+    {
+        sound.Play(answer);
+    }
+
+    private static bool CheckAnswer(bool[] submitted, bool[] answer)
+    {
+        if (submitted.Length != answer.Length)
+        {
+            throw new Exception($"Submitted {submitted.Length} and answer {answer.Length} lengths do not match");
+        }
+
+        for (int i = 0; i < submitted.Length; i++)
+        {
+            if (submitted[i] != answer[i])
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 

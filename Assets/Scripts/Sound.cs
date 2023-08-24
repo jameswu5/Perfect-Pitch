@@ -44,4 +44,18 @@ public class Sound : MonoBehaviour
         PlaySound(samples);
     }
 
+    public void Play(bool[] noteArray)
+    {
+        List<int> notes = new();
+        for (int i = 0; i < noteArray.Length; i++)
+        {
+            if (noteArray[i])
+            {
+                notes.Add(i);
+            }
+        }
+
+        Play(notes);
+    }
+
 }
