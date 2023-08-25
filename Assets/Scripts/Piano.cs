@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Piano : MonoBehaviour
@@ -59,7 +57,7 @@ public class Piano : MonoBehaviour
         {
             if (keys[i] != null)
             {
-                keys[i].ResetColour();
+                keys[i].Reset();
             }
         }
     }

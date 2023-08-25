@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Key : MonoBehaviour
@@ -10,10 +8,9 @@ public class Key : MonoBehaviour
     private bool isWhiteKey;
     private Color originalColour;
     private Color highlightColour;
+    private Color answerColour;
     private SpriteRenderer sr;
-
     private Piano piano;
-
     private bool selected;
 
     private void Start()
@@ -21,6 +18,7 @@ public class Key : MonoBehaviour
         isWhiteKey = Note.IsWhiteKey(note);
         originalColour = isWhiteKey ? Colour.White : Colour.Black;
         highlightColour = isWhiteKey ? Colour.LightGrey : Colour.DarkGrey;
+        answerColour = isWhiteKey ? Colour.LightYellow : Colour.DarkYellow;
         sr = isWhiteKey ? gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() : gameObject.GetComponent<SpriteRenderer>();
         selected = false;
         id = octave * 12 + note - 1;
@@ -34,8 +32,13 @@ public class Key : MonoBehaviour
         piano.ToggleKey(id, selected);
     }
 
-    public void ResetColour()
+    public void Reset()
     {
         sr.color = originalColour;
+        selected = false;
     }
+
+    public void SetAnswerColour() => sr.color = answerColour;
+
+    public override string ToString() => $"{Note.GetNote(note)}{octave}";
 }

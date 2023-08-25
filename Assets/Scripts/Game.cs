@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,27 +18,29 @@ public class Game : MonoBehaviour
     public Sound sound;
 
     public bool[] answer;
+    public bool answerShown;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         score = 0;
         level = 1;
         octaves = 2;
 
-        scoreText.text = score.ToString();
+        scoreText.text = $"Score: {score}";
         levelText.text = level.ToString();
         octaveText.text = octaves.ToString();
 
         CreateLevel();
         sound.Play(answer);
-
     }
 
     public void IncrementScore()
     {
-        score++;
-        scoreText.text = score.ToString();
+        if (!answerShown)
+        {
+            score++;
+            scoreText.text = $"Score: {score}";
+        }
     }
 
     public void IncreaseLevel()
@@ -97,6 +97,7 @@ public class Game : MonoBehaviour
         }
 
         answer = notes;
+        answerShown = false;
     }
 
     public void Submit()
@@ -114,6 +115,19 @@ public class Game : MonoBehaviour
     public void Replay()
     {
         sound.Play(answer);
+    }
+
+    public void ShowAnswer()
+    {
+        for (int i = 0; i < answer.Length; i++)
+        {
+            if (answer[i])
+            {
+                piano.keys[i].SetAnswerColour();
+            }
+        }
+
+        answerShown = true;
     }
 
     private static bool CheckAnswer(bool[] submitted, bool[] answer)
@@ -160,5 +174,4 @@ public class Game : MonoBehaviour
 
         return new int[] { l, r };
     }
-
 }
