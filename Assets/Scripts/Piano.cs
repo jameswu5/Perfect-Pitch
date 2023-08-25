@@ -6,7 +6,6 @@ public class Piano : MonoBehaviour
     public const int NumberOfKeys = 88;
     public bool[] selectedKeys;
     public Key[] keys;
-    public Sound sound;
 
     public const int C3 = 27;
     public const int C4 = 39;
@@ -36,10 +35,11 @@ public class Piano : MonoBehaviour
         {
             Transform octave = gameObject.transform.GetChild(i);
             int n = octave.childCount;
+
             for (int j = 0; j < n; j++)
             {
                 Key key = octave.GetChild(j).GetComponent<Key>();
-                keys[key.id] = key;
+                keys[key.GetIndex()] = key;
             }
         }
     }

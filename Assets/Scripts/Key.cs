@@ -4,7 +4,6 @@ public class Key : MonoBehaviour
 {
     public int octave;
     public int note;
-    public int id;
     private bool isWhiteKey;
     private Color originalColour;
     private Color highlightColour;
@@ -21,7 +20,6 @@ public class Key : MonoBehaviour
         answerColour = isWhiteKey ? Colour.LightYellow : Colour.DarkYellow;
         sr = isWhiteKey ? gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>() : gameObject.GetComponent<SpriteRenderer>();
         selected = false;
-        id = octave * 12 + note - 1;
         piano = transform.parent.parent.GetComponent<Piano>();
     }
 
@@ -29,7 +27,7 @@ public class Key : MonoBehaviour
     {
         sr.color = selected ? originalColour : highlightColour;
         selected = !selected;
-        piano.ToggleKey(id, selected);
+        piano.ToggleKey(GetIndex(), selected);
     }
 
     public void Reset()
@@ -41,4 +39,6 @@ public class Key : MonoBehaviour
     public void SetAnswerColour() => sr.color = answerColour;
 
     public override string ToString() => $"{Note.GetNote(note)}{octave}";
+
+    public int GetIndex() => octave * 12 + note - 1;
 }
